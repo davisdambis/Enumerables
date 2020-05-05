@@ -54,7 +54,7 @@ module Enumerable
 
   # my_none?
 
-  def my_none? 
+  def my_none?
     if_none = true
     my_each do |i|
       break if_none = false if yield(i)
