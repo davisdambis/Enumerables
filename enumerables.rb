@@ -16,6 +16,7 @@ module Enumerable
   # end of my_each
 
   # my_each_with_index
+
   def my_each_with_index
     return to_enum unless block_given?
 
@@ -59,11 +60,13 @@ module Enumerable
 
   # my_any?
 
-  def my_any?(arg = nil)
+  def my_any?(arg = nil, &block)
     if_any = false
     my_each do |i|
-      if block_given? || arg.nil?
-        return true if i == true
+      if block_given?
+        return true if block.call(i)
+      elsif arg.nil?
+        return true if i
       elsif arg.class == Class
         return true if i.is_a?(arg)
       elsif arg.class == Regexp
@@ -79,20 +82,8 @@ module Enumerable
 
   # my_none?
 
-  def my_none?(arg = nil)
-    if_none = true
-    my_each do |i|
-      if block_given? || arg.nil?
-        return false if i == true
-      elsif arg.class == Class
-        return false if i.is_a?(arg)
-      elsif arg.class == Regexp
-        return false if i =~ arg
-      elsif i == arg
-        if_none = false
-      end
-    end
-    if_none
+  def my_none?(arg = nil, &block)
+    !my_any?(arg, &block)
   end
 
   # end of my_none?
