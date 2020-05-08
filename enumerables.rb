@@ -40,20 +40,21 @@ module Enumerable
 
   # my_all?
 
-  def my_all?(arg = nil)
-    if_all = true
+  def my_all?(arg = nil, &block)
     my_each do |i|
-      if block_given? || arg.nil?
-        return false if i.nil? || i == false
+      if block_given?
+        return false unless block.call(i)
+      elsif arg.nil?
+        return false unless i
       elsif arg.class == Class
         return false unless i.is_a?(arg)
       elsif arg.class == Regexp
         return false unless i =~ arg
       else
-        if_all = false unless i == arg
+        return false unless i == arg
       end
     end
-    if_all
+    true
   end
 
   # end of my_all?
