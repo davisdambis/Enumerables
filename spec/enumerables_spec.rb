@@ -1,4 +1,4 @@
-require_relative '../bin/enumerables.rb'
+require_relative '../lib/enumerables.rb'
 
 RSpec.describe Enumerable do
   describe '#my_each' do
