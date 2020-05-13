@@ -6,7 +6,7 @@ Authors
 
 👤 Davis Dambis
 
-    Github: @davisdambis
+Github:[@davisdambis](https://github.com/davisdambis)
 
 🤝 Contributing
 
